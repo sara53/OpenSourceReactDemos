@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export function Counter() {
+  /**
+   * componentDidMount, componentDidUpdate
+   * no second Params --> componentDidMount, componentDidUpdate on all states
+   * [] --> componentDidMount
+   * [stateName] --> componentDidMount, componentDidUpdate [stateName]
+   */
+
   let [count, setCount] = useState(0);
   let [title, setTitle] = useState("counter Component");
   let [show, setShow] = useState(false);
+
+  useEffect(() => {
+    /** clean up function */
+    return () => {
+      console.log("Hello From Clean up function");
+    };
+  }, [count]);
 
   let increase = () => {
     setCount(count + 1);
@@ -19,6 +33,7 @@ export function Counter() {
   };
   return (
     <div className="bg-light  p-5 text-center lead">
+      {console.log("1- Render")}
       <h1>{title}</h1>
       <p className="fs-3">
         count :<strong className="text-danger"> {count}</strong>
